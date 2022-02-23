@@ -1,17 +1,16 @@
-package myProject;
-
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class LockedMe 
 {
-	static final String projectFilesPath = "E:\\SimpliLearn\\LockedMeFiles";
+	static final String projectFilesPath = "C:\\SimpliLearn\\LockedMeFiles";
 	static String errorMessage="Some Error Ocuurred. Please contact customer care";
-	public static void main(String[] args)
+	public static void main(String[] args) throws IOException
 	{
 		// TODO Auto-generated method stub
-		displayAllFiles();
-
+        createFiles();
 	}
 	
 	// Displaying menus, developer name to the users.
@@ -69,12 +68,32 @@ public class LockedMe
 	}
 	
 	// To add a particular File to a Directory.
-	public static void createFiles()
+	public static void createFiles() throws IOException
 	{
 		Scanner obj=new Scanner(System.in);
-		
+		try {
+			String fileName;
+			System.out.println("Enter Filename:");
+			fileName=obj.nextLine();
+			int linesCount;
+			System.out.println("Please enter how many lines required in file?");
+			linesCount=Integer.parseInt(obj.nextLine());
+			FileWriter myWriter=new FileWriter(projectFilesPath+"\\"+fileName);
+			for(int i=1;i<=linesCount;i++)
+			{
+				System.out.println("Enter the "+i+"of the file");
+				myWriter.write(obj.nextLine()+"\n");
+			}	
+			myWriter.close();
+			obj.close();
+		}
+		catch(Exception ex) {
+			System.out.println(errorMessage);
+		}
+
 	}
 	
+	//To search a file from a Directory
 	public static void searchFiles()
 	{
 		
